@@ -1,0 +1,19 @@
+.footer {
+	--padding: #{($spacer * 2) x};
+
+	&__row {
+		@include flexbox($fw: wrap, $jc: space-between, $ai: center);
+	}
+
+	&__col {
+		@media #{query(false, sm)} {
+			flex: 1 1 100%;
+			width: 100%;
+			text-align: center;
+
+			&:first-child {
+				margin-bottom: $spacer;
+			}
+		}
+	}
+}

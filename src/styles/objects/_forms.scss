@@ -1,0 +1,5 @@
+input {
+	&.error {
+		@include border($color: $red);
+	}
+}

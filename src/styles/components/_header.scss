@@ -1,0 +1,9 @@
+.header {
+	background-color: $light;
+	--padding: #{($spacer * 2) x};
+
+	&__logo {
+		max-width: pxToRem(245);
+		max-height: pxToRem(87);
+	}
+}

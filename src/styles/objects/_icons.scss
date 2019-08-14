@@ -1,0 +1,82 @@
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts/';
+@import '~@fortawesome/fontawesome-free/scss/variables';
+
+
+@font-face {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 900;
+  font-display: $fa-font-display;
+  src: url('#{$fa-font-path}/fa-solid-900.eot');
+  src: url('#{$fa-font-path}/fa-solid-900.eot?#iefix') format('embedded-opentype'),
+  url('#{$fa-font-path}/fa-solid-900.woff2') format('woff2'),
+  url('#{$fa-font-path}/fa-solid-900.woff') format('woff'),
+  url('#{$fa-font-path}/fa-solid-900.ttf') format('truetype'),
+  url('#{$fa-font-path}/fa-solid-900.svg#fontawesome') format('svg');
+}
+
+@font-face {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 400;
+  font-display: $fa-font-display;
+  src: url('#{$fa-font-path}/fa-regular-400.eot');
+  src: url('#{$fa-font-path}/fa-regular-400.eot?#iefix') format('embedded-opentype'),
+  url('#{$fa-font-path}/fa-regular-400.woff2') format('woff2'),
+  url('#{$fa-font-path}/fa-regular-400.woff') format('woff'),
+  url('#{$fa-font-path}/fa-regular-400.ttf') format('truetype'),
+  url('#{$fa-font-path}/fa-regular-400.svg#fontawesome') format('svg');
+}
+
+@font-face {
+  font-family: 'Font Awesome 5 Brands';
+  font-style: normal;
+  font-weight: normal;
+  font-display: $fa-font-display;
+  src: url('#{$fa-font-path}/fa-brands-400.eot');
+  src: url('#{$fa-font-path}/fa-brands-400.eot?#iefix') format('embedded-opentype'),
+  url('#{$fa-font-path}/fa-brands-400.woff2') format('woff2'),
+  url('#{$fa-font-path}/fa-brands-400.woff') format('woff'),
+  url('#{$fa-font-path}/fa-brands-400.ttf') format('truetype'),
+  url('#{$fa-font-path}/fa-brands-400.svg#fontawesome') format('svg');
+}
+
+@mixin sprite($position: before, $icon: null, $fw: null, $dx: null, $fs: inherit, $color: inherit, $va: inherit) {
+	&::#{$position} {
+		content: fa-content($icon);
+		display: inline-block;
+		font-family: 'Font Awesome 5 Free';
+		font-style: normal;
+		font-size: $fs;
+		color: $color;
+		vertical-align: $va;
+		
+		@if $fw == s {
+			font-weight: 900;
+		} @else if $fw == r {
+			font-weight: 400;
+		} @else {
+			font-weight: normal;
+		}
+
+		@if $dx and $dx < 0 {
+			padding-right: (-1 * $dx);
+		} @else if $dx and $dx > 0 {
+			padding-left: $dx;
+		}
+	}
+}
+
+$is: ($spacer / 2);
+
+@function fa-content($content) {
+	@return unquote("\"#{ $content }\"");
+}
+
+.icon-chevron-right {
+  @include sprite($position: after, $icon: $fa-var-chevron-right, $fw: s, $dx: $is, $fs: $font-size-base * 0.75);
+}
+
+.icon-chevron-left {
+  @include sprite($icon: $fa-var-chevron-left, $fw: s, $dx: -1 * $is, $fs: $font-size-base * 0.75);
+}

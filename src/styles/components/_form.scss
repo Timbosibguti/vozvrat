@@ -1,0 +1,33 @@
+.form {
+	@include bg-img($size: auto 100%, $position: top right);
+	background-image: linear-gradient(to right, $white, $white calc(5% + 400px), transparent calc(5% + 750px), transparent), url('../img/shutterstock_1299576493.png');
+
+	&__inner {
+		position: relative;
+		max-width: pxToRem(400);
+	}
+
+	&__title {
+		margin-bottom: pxToRem(30);
+	}
+
+	&__description {
+		margin-bottom: pxToRem(50);
+	}
+
+	&__btns {
+		@include flexbox($fw: wrap, $jc: space-between);
+	}
+	&-main{
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+	}
+	&-block{
+		position: relative;
+		display: inline-block;
+		width: 100%;
+		left: 0;
+		transition: left ease .5s;
+	}
+}

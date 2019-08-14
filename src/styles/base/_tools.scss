@@ -1,0 +1,147 @@
+@import '~bootstrap/scss/mixins';
+@import '~bootstrap/scss/utilities/text';
+
+@mixin text($size: null, $fs: $font-size-base, $lh: $line-height-base, $weight: null) {
+    @if $size == base {
+        font-size: $font-size-base;
+    } @else if($size == sm) {
+        font-size: $font-size-sm;
+    } @else if ($size == h1) {
+        font-size: $font-size-base * 3.75;
+
+        @if not $weight {
+            font-weight: $font-weight-bold;
+        }
+        
+    } 
+
+    @else if($size == h2) {
+        font-size: $font-size-base * 2.5;
+
+        @if not $weight {
+            font-weight: $font-weight-bold;
+        }
+
+    } 
+
+    @else if($size == h3) {
+        font-size: $font-size-base * 1.5;
+    }
+
+    @else {
+        font-size: $fs;
+    }
+
+    @if $lh {
+        line-height: $lh;
+    }
+
+    @if $weight {
+        font-weight: $weight;
+    }
+}
+
+@mixin border($position: null, $width: 1px, $style: solid, $color: $black) {
+    @if $position {
+        border-#{$position}-width: #{$width};
+        border-#{$position}-style: #{$style};
+        border-#{$position}-color: #{$color};
+    } @else {
+        @if $width or $style or $color {
+            --border-width: #{$width};
+            --border-style: #{$style};
+            --border-color: #{$color};
+        }
+    }
+    
+}
+
+@mixin rounded-border($bw: 1px, $bc: $gray-900, $bs: solid, $size: 3rem) {
+    --size: #{$size};
+    border-radius: 50%;
+    @include border($width: $bw, $color: $bc, $style: $bs);
+    @include flexbox($jc: center, $ai: center);
+}
+
+@mixin bg-img($link: false, $overlay: false, $repeat: no-repeat, $position: center, $size: cover) {
+    @if $link {
+        $img: '../img/#{$link}';
+
+        @if $overlay {
+            background-image: linear-gradient($overlay, $overlay), url($img);
+        } @else if {
+            background-image: url($img);
+        }
+    }
+
+    background-repeat: $repeat;
+    background-position: $position;
+    background-size: $size;
+}
+
+@mixin flexbox($display: flex, $fw: null, $jc: null, $ai: null) {
+    display: $display;
+
+    @if $fw {
+        flex-wrap: $fw;
+    }
+
+    @if $jc {
+        justify-content: $jc;
+    }
+
+    @if $ai {
+        align-items: $ai;
+    }
+}
+
+@mixin loader($size: 50px, $border-width: 5px, $border-type: solid, $border-color: $black, $color-top: $primary, $timing: .4s, $easing: linear, $loop: infinite) {
+    border: $border-width $border-type $border-color;
+    border-radius: 50%;
+    border-top: $border-width $border-type $color-top;
+    --size: #{$size};
+    animation: spin $timing $easing $loop;
+}
+
+
+
+
+@function query($w1, $w2) {
+    $min: false !default;
+    $max: false !default;
+
+    @if $w1 {
+        @if map-has-key($grid-breakpoints, $w1) {
+            $min: map-get($grid-breakpoints, $w1);
+        } @else {
+            $min: $w1;
+        }
+    }
+
+    @if $w2 {
+        @if map-has-key($grid-breakpoints, $w2) {
+            $max: map-get($grid-breakpoints, $w2);
+        } @else {
+            $max: $w2;
+        }
+    }
+
+    @if $min and not $max {
+        @return '(min-width: #{$min})';
+    } @else if $max and not $min {
+        @return '(max-width: #{$max})';
+    } @else {
+        @return '(min-width: #{$min}) and (max-width: #{$max})';
+    }
+}
+
+@function pxToRem($px) {
+    @return #{$px / 16}rem;
+}
+
+// ANIMATIONS
+/* Loader yellow part */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

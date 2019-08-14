@@ -1,0 +1,93 @@
+.explanations {
+	background-color: $light;
+
+	&__list {
+		@include make-row();
+	}
+
+	&__item {
+		@include make-col-ready();
+
+		@media #{query(false, xs)} {
+			@include make-col(1, 1);
+
+			&:not(:last-child) {
+				margin-bottom: ($spacer * 2);
+			}
+		}
+
+		@media #{query(xs, md)} {
+			@include make-col(1, 2);
+
+			&:not(:nth-child(n+3)) {
+				margin-bottom: ($spacer * 2);
+			}
+		}
+
+		@media #{query(md, false)} {
+			@include make-col(1, 4);
+		}
+
+		@media #{query(xl, false)} {
+			&:not(:last-child)::after {
+				content: '';
+				display: inline-block;
+				position: absolute;
+				top: pxToRem(121/2);
+				right: 15px;
+				transform: translateY(-50%);
+				background-image: url('../img/icons/long-forma-right.png');
+				background-size: 100% auto;
+				background-repeat: no-repeat;
+				--size: #{100px pxToRem(22)};
+			}
+		}
+	}
+
+	&__icon {
+		@include rounded-border($bw: null, $bc: null, $bs: null);
+		background-color: $primary;
+		color: $white;
+		--size: #{pxToRem(121)};
+
+		@media #{query(false, md)} {
+			margin-bottom: $spacer;
+		}
+
+		@media #{query(md, false)} {
+			margin-bottom: ($spacer * 2);
+		}
+
+		&::before {
+			content: '';
+			display: inline-block;
+			--size: #{pxToRem(50)};
+			background-repeat: no-repeat;
+
+		}
+
+		&.icon-measuring-tape {
+			&::before {
+				background-image: url('../img/icons/measuring-tape.png');
+			}
+		}
+
+		&.icon-sketch {
+			&::before {
+				background-image: url('../img/icons/sketch.png');
+			}
+		}
+
+		&.icon-web-optimization {
+			&::before {
+				background-image: url('../img/icons/web-optimization.png');
+			}
+		}
+
+		&.icon-debt {
+			&::before {
+				background-image: url('../img/icons/debt.png');
+			}
+		}
+	}
+}

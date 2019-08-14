@@ -1,0 +1,15 @@
+@import '~bootstrap/scss/reboot';
+
+body, html {
+	--size: 100%;
+}
+
+dl, ol, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+	display: inline-block;
+	color: inherit;
+}
